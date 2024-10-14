@@ -135,16 +135,13 @@ export default function Header() {
                 </div>
 
                 <div className={"header__account flex-s-between"}>
-                    {account && (
-                        <>
-                            <NetworkCard />
-                            {(chainId === AlgebraConfig.CHAIN_PARAMS.chainId && account && userEthBalance) || networkFailed ? (
-                                <BalanceText style={{ flexShrink: 0 }} px="0.85rem" fontWeight={500}>
-                                    {_userEthBalance?.toFixed(5)} {!isMobile && chainValue}
-                                </BalanceText>
-                            ) : null}
-                        </>
-                    )}
+                    <NetworkCard />
+
+                    {(account && chainId === AlgebraConfig.CHAIN_PARAMS.chainId && userEthBalance) || networkFailed ? (
+                        <BalanceText style={{ flexShrink: 0 }} px="0.85rem" fontWeight={500}>
+                            {_userEthBalance?.toFixed(5)} {!isMobile && chainValue}
+                        </BalanceText>
+                    ) : null}
                     <Web3Status />
                 </div>
             </div>
