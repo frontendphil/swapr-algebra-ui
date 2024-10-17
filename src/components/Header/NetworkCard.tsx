@@ -10,23 +10,12 @@ import styled from "styled-components/macro";
 import AlgebraConfig from "algebra.config";
 
 export default function NetworkCard() {
-    const { chainId, connector } = useWeb3React();
+    const { chainId } = useWeb3React();
 
     const node = useRef<HTMLDivElement>(null);
     const open = useModalOpen(ApplicationModal.ARBITRUM_OPTIONS);
     const toggle = useToggleModal(ApplicationModal.ARBITRUM_OPTIONS);
     useOnClickOutside(node, open ? toggle : undefined);
-
-    const [implements3085, setImplements3085] = useState(false);
-    useEffect(() => {
-        // metamask is currently the only known implementer of this EIP
-        // here we proceed w/ a noop feature check to ensure the user's version of metamask supports network switching
-        // if not, we hide the UI
-        if (!chainId) {
-            return;
-        }
-        connector.activate(chainId);
-    }, [chainId, connector]);
 
     const info = chainId ? CHAIN_INFO[chainId] : undefined;
     if (!chainId || !info) {
